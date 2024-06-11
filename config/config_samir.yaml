@@ -1,0 +1,54 @@
+
+base_dir: "./"
+data_path: "/media/hd2/Colon/Data_GT_Annotaion"
+# pkl_normalize: "./config/ctcNormalization_updated.pkl"
+pkl_normalize: "./config/ctcNormalization.pkl"
+output_dir: "models"
+test_save_dir: "seg_out/"
+# saved_model_path: "/media/hd1/home/Shared/CTC_CVIP/Software/DeepLearning/models/PAN/PANresnext101_32x48d-val_dice=0.9180.ckpt"
+# saved_model_path: '/media/hd1/colon_sample/Samir_cvip_seg/CTC_CVIP/Software/DeepLearning/models/Unet++/Unet++timm-regnety_320-val_dice=0.9792.ckpt'
+saved_model_path: "/home/Shared/CTC_CVIP/Software/DeepLearning/models/Unet++-Unet++/timm-resnest269e-timm-resnest26d-val_dice=0.9824.ckpt"
+
+
+seed: 400
+train_bs: 8
+valid_bs: 32
+workers: 1
+
+progress_bar_refresh_rate: 100
+
+early_stop:
+    monitor: "val_loss"
+    mode: "min"
+    patience: 10
+    verbose: 1
+
+trainer:
+    max_epochs: 11 #26
+    min_epochs: 11 #26
+    enable_progress_bar: True
+    precision: "16-mixed"
+    devices: 1
+
+model:
+    seg_model: "Unet++"
+    encoder_name: "timm-resnest269e"
+    encoder_weights: "imagenet" #"instagram" #"imagenet"
+    loss_smooth: 1.0
+    in_channels: 3
+    image_size: 512
+    optimizer_params:
+        lr: 0.0001 #5
+        weight_decay: 0.03 # #0.01, 0.02
+    scheduler:
+        name: "CosineAnnealingLR"
+        params:
+            CosineAnnealingLR:
+                T_max: 2
+                eta_min: 1.0e-6
+                last_epoch: -1
+            ReduceLROnPlateau:
+                mode: "min"
+                factor: 0.31622776602
+                patience: 4
+                verbose: True

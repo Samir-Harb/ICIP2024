@@ -1,0 +1,85 @@
+config:
+  base_dir: ./
+  data_path: /media/hd2/Colon/Data_GT_Annotaion
+  early_stop:
+    mode: min
+    monitor: val_loss2
+    patience: 10
+    verbose: 1
+  model1:
+    convLSTM_hidden_chs:
+    - 32
+    - 16
+    - 8
+    convLSTM_kSize: 3
+    encoder_name: timm-resnest269e
+    encoder_weights: imagenet
+    image_size: 512
+    in_channels: 1
+    loss_smooth: 1.0
+    model_path: /media/hd1/home/Shared/CTC_CVIP/Software/DeepLearning/models/Unet++/Unet++timm-resnest269e-val_dice=0.9825.ckpt
+    optimizer_params:
+      lr: 0.0001
+      weight_decay: 0.03
+    pretrained: true
+    scheduler:
+      name: CosineAnnealingLR
+      params:
+        CosineAnnealingLR:
+          T_max: 2
+          eta_min: 1.0e-06
+          last_epoch: -1
+        ReduceLROnPlateau:
+          factor: 0.31622776602
+          mode: min
+          patience: 4
+          verbose: true
+        max_iters: 725600
+        max_lr: 0.0005
+    seg_model: Unet++
+  model2:
+    convLSTM_hidden_chs:
+    - 32
+    - 16
+    - 8
+    convLSTM_kSize: 3
+    encoder_name: timm-resnest26d
+    encoder_weights: imagenet
+    image_size: 512
+    in_channels: 1
+    loss_smooth: 1.0
+    model_path: /media/hd1/home/Shared/CTC_CVIP/Software/DeepLearning/models/Unet++-Unet++/timm-resnest269e-timm-resnest26d-val_dice=0.9824.ckpt
+    optimizer_params:
+      lr: 0.0001
+      weight_decay: 0.03
+    scheduler:
+      name: CosineAnnealingLR
+      params:
+        CosineAnnealingLR:
+          T_max: 2
+          eta_min: 1.0e-06
+          last_epoch: -1
+        ReduceLROnPlateau:
+          factor: 0.31622776602
+          mode: min
+          patience: 4
+          verbose: true
+        max_iters: 725600
+        max_lr: 0.0005
+    seg_model: Unet++
+  output_dir: models
+  pkl_normalize: /media/hd1/home/Shared/CTC_CVIP/Software/DeepLearning/config/ctcNormalization.pkl
+  progress_bar_refresh_rate: 1000
+  saved_model_path: /media/hd1/home/Shared/CTC_CVIP/Software/DeepLearning/models/Unet++/Unet++tu-resnest101e-sltm-val_dice=0.5681.ckpt
+  seed: 400
+  seq_len: 5
+  test_save_dir: seg_out/
+  train_bs: 4
+  trainer:
+    devices: 1
+    enable_progress_bar: true
+    max_epochs: 100
+    min_epochs: 100
+    precision: 16-mixed
+  valid_bs: 2
+  workers: 1
