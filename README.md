@@ -1,14 +1,14 @@
-### ICIP2024
+# ICIP2024
 This repository contains the implementation code for our paper recently accepted at the ICIP 2024 conference
 ## The paper: "Accurate colon segmentation using 2D convolutional neural networks with 3D contextual information"
 More contents will be added later.
 
-## Requirements
+### Requirements
 CUDA/CUDNN
 torch >= 1.4.0
 torchvision
 numpy
 
-## Datasets 
+### Datasets 
 To get access for our private dataset, please contact aly.farag@louisville.edu
 
