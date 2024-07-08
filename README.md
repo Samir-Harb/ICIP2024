@@ -5,11 +5,11 @@ This repository contains the implementation code for model architecture for our 
 More contents will be added later.
 
 ### Requirements
-CUDA/CUDNN
-torch >= 1.4.0
-torchvision
-numpy
-
+- CUDA/CUDNN
+- torchvision 0.15.2+cu117
+- numpy
+- Torch 2.3.0+cu121
+- scipy 1.11.3
 ### Datasets 
 To get access for our private dataset, please contact aly.farag@louisville.edu
 
